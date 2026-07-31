@@ -8,9 +8,9 @@
 
 | 方式 | 路径 | 说明 |
 |------|------|------|
-| 报告 Bug | [Issues → Bug Report](https://github.com/YOUR_USERNAME/financeos/issues/new?template=bug_report.md) | 任何问题都欢迎报告 |
-| 提功能建议 | [Issues → Feature Request](https://github.com/YOUR_USERNAME/financeos/issues/new?template=feature_request.md) | 想要的功能、改进点 |
-| 贡献 KB 条目 | [Issues → KB Contribution](https://github.com/YOUR_USERNAME/financeos/issues/new?template=kb_contribution.md) | 为你的行业添加规则/模板/案例 |
+| 报告 Bug | [Issues → Bug Report](https://github.com/sunjun0621/FinanceOS_WorkBuddy/issues/new?template=bug_report.md) | 任何问题都欢迎报告 |
+| 提功能建议 | [Issues → Feature Request](https://github.com/sunjun0621/FinanceOS_WorkBuddy/issues/new?template=feature_request.md) | 想要的功能、改进点 |
+| 贡献 KB 条目 | [Issues → KB Contribution](https://github.com/sunjun0621/FinanceOS_WorkBuddy/issues/new?template=kb_contribution.md) | 为你的行业添加规则/模板/案例 |
 | 改进文档 | PR 到 `docs/` 目录 | 修正错误、补充说明、翻译 |
 
 ### 🔵 代码/内容贡献
@@ -109,9 +109,9 @@ FinanceOS 的知识库（KB）按约束力分为四级，贡献前请确认你�
 
 ## 问题与讨论
 
-- 🐛 **Bug 报告**：[Issues](https://github.com/YOUR_USERNAME/financeos/issues)
-- 💡 **功能建议**：[Issues](https://github.com/YOUR_USERNAME/financeos/issues)
-- 💬 **社区讨论**：[Discussions](https://github.com/YOUR_USERNAME/financeos/discussions)
+- 🐛 **Bug 报告**：[Issues](https://github.com/sunjun0621/FinanceOS_WorkBuddy/issues)
+- 💡 **功能建议**：[Issues](https://github.com/sunjun0621/FinanceOS_WorkBuddy/issues)
+- 💬 **社区讨论**：[Discussions](https://github.com/sunjun0621/FinanceOS_WorkBuddy/discussions)
 
 ---
 

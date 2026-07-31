@@ -8,10 +8,10 @@
 
 | 平台 | 目录 | 状态 |
 |------|------|------|
-| WorkBuddy | [workbuddy/](workbuddy/) | ✅ 完整（含 SKILL.md） |
-| ChatGPT | [chatgpt/](chatgpt/) | ✅ 完整（Custom GPT 指南） |
-| Claude | [claude/](claude/) | ✅ 完整（Project 指南） |
-| 通用 | [generic/](generic/) | ✅ 完整（任意平台 + 本地 LLM） |
+| WorkBuddy | [workbuddy/](workbuddy/) | ✅ 完整（含 SKILL.md 指令文件） |
+| ChatGPT | [chatgpt/](chatgpt/) | ⚠️ 仅 README 指南（待补 Custom GPT 指令模板） |
+| Claude | [claude/](claude/) | ⚠️ 仅 README 指南（待补 Project 指令模板） |
+| 通用 | [generic/](generic/) | ⚠️ 仅 README 指南（万能适配器，待补指令模板） |
 
 ## 贡献新适配器
 

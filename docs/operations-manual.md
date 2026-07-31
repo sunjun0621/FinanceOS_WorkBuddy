@@ -1,8 +1,13 @@
-# FinanceOS V2.2 运行手册
+# FinanceOS V2.4 运行手册
 
-> 版本：v1.0 · 2026-07-31
+> 版本：v2.4 · 2026-07-31
 > 适用：cfo-command-center v4.1 + 三库框架 v1.0
-> 位置：`~/.workbuddy/skills/cfo-command-center/` + `~/.workbuddy/financeos-kb/`
+> 位置：`{FINANCEOS_SKILL_DIR}/` + `{FINANCEOS_KB_ROOT}/`
+>
+> **路径变量说明**（v2.4 去平台化）：
+> - `{FINANCEOS_KB_ROOT}` = 知识库根目录（仓库内默认 `./kb/`；WorkBuddy 部署默认 `~/.workbuddy/financeos-kb/`）
+> - `{FINANCEOS_SKILL_DIR}` = 技能目录（仓库内为 `adapters/workbuddy/`；WorkBuddy 部署为 `~/.workbuddy/skills/cfo-command-center/`）
+> - 各平台部署路径对照见 [`docs/getting-started.md`](getting-started.md) 平台对照表
 
 ---
 
@@ -32,13 +37,13 @@ FinanceOS V2.2 是为市属水务国企财务总监设计的 AI 认知操作系�
 ### 1.2 物理架构
 
 ```
-~/.workbuddy/
-├── skills/cfo-command-center/SKILL.md          # 技能（调度逻辑）  ~12KB
-└── financeos-kb/                               # 知识库（内容底座）  ~128KB
+{FINANCEOS_DEPLOY_ROOT}/   # 平台部署根（WorkBuddy 默认 ~/.workbuddy/；其他平台见 adapters/）
+├── skills/cfo-command-center/SKILL.md          # 技能（调度逻辑）  ~12KB  ← 仓库 adapters/workbuddy/SKILL.md
+└── financeos-kb/                               # 知识库（内容底座）  ~128KB  ← 仓库 kb/
     ├── 三库框架规范_v1.md                       # 总纲
     ├── L1-规则库/
     │   ├── 脱敏标准清单.md                      # 数据脱敏红线
-    │   ├── 权限分级.md                          # T1-T4 风险分层
+    │   ├── 权限分级.md                          # Gate-L/M/H/X 风险分层
     │   └── 异常阈值标准.md                      # 分科目阈值 + 判定矩阵 v1.1
     ├── L2-模板库/
     │   ├── 月度经营分析模板_v1.md
@@ -51,7 +56,7 @@ FinanceOS V2.2 是为市属水务国企财务总监设计的 AI 认知操作系�
     │   ├── 月度预算执行分析_案例002_6月旺季.md   # 6月·旺季
     │   └── 季度财务分析_案例003_Q2旺季.md        # Q2·季度
     ├── L4-决策日志/
-    │   └── 决策日志记录模板_v1.md                # 空模板，待T3+触发
+    │   └── 决策日志记录模板_v1.md                # 空模板，待 Gate-H+ 触发
     └── 数据缓冲区/                              # 临时数据，任务结束即弃
         ├── 2026-07-30_月度预算执行分析/
         ├── 2026-07-30_月度预算执行分析_6月数据/
@@ -117,14 +122,17 @@ Step0 模式判别（3秒内完成）
 
 **校验是执行阶段的收尾步骤**（不是独立阶段），四维校验：勾稽 / 异常 / 口径 / 格式。校验不通过≤2轮回退修正，>2轮停下报告。
 
-### 2.4 风险等级与协作模式
+### 2.4 风险等级与协作模式（STOP Gate 四级）
 
-| 风险等级 | 协作模式 | gate 强度 | 审计三段 | 触发 L4 |
-|---------|---------|----------|---------|---------|
-| T1 日常查询 | 委托 | 异常才报 | 不输出 | 否 |
-| T2 分析研究 | 标准 | 关键节点 | 不输出 | 否 |
-| T3 预算/报送 | 标准 | +数据校验+脱敏 | 简版 | **强制** |
-| T4 审计/巡视 | 紧控 | 每步 gate + 决策日志 | 完整 | **全量** |
+| Gate | 协作模式 | gate 强度 | 审计三段 | 触发 L4 |
+|------|---------|----------|---------|---------|
+| Gate-L 日常查询 | 委托 | 异常才报 | 不输出 | 否 |
+| Gate-M 分析研究 | 标准 | 关键节点 | 不输出 | 否 |
+| Gate-H 预算/报送 | 标准 | +数据校验+脱敏 | 简版 | **强制** |
+| Gate-H 审计/巡视（严格子级） | 紧控 | 每步 gate + 决策日志 | 完整 | **全量** |
+| Gate-X 禁止 | 拒绝执行 | — | — | — |
+
+> v2.4：原 T1/T2/T3/T4 细化为 Gate-L/M/H/X。原 T4（审计巡视）归入 Gate-H 严格子级；新增 Gate-X 禁止级（删除/修改原始数据）。
 
 **预设方案**（V2.2 新增，减少打断）：
 - 内部分析默认：不脱敏、不输出审计三段、分析决策预设阈值自动执行
@@ -149,7 +157,7 @@ Step0 模式判别（3秒内完成）
 每次新开会话，对 AI 说：
 
 ```
-加载 cfo-command-center 技能，读 ~/.workbuddy/financeos-kb/三库框架规范_v1.md，继续 V2.2 推进
+加载 cfo-command-center 技能，读 {FINANCEOS_KB_ROOT}/三库框架规范_v1.md，继续 V2.2 推进
 ```
 
 AI 会自动完成：
@@ -260,7 +268,7 @@ AI 会自动完成：
    - 水价调整：调价影响测算、成本补偿充分性、社会稳定风险
    - 重大投资：NPV/IRR/回收期、现金流影响、投后管理
    - 资产处置：处置损益测算、国资流失风险、审批合规
-4. **风险等级**：专项分析默认 T3（对外报送级），需要脱敏 + 审计三段
+4. **风险等级**：专项分析默认 Gate-H（对外报送级），需要脱敏 + 审计三段
 
 ### 4.4 场景D：日常查询
 
@@ -359,7 +367,7 @@ AI 走紧急通道：取数 → 简单归因 → 输出（标注"紧急初稿，
 
 ### 5.5 L4 决策日志记录
 
-**自动触发**：T3/T4 任务的 STOP gate 通过时自动记录
+**自动触发**：Gate-H 任务的 STOP gate 通过时自动记录
 
 **手动触发**：
 ```
@@ -378,9 +386,9 @@ AI 走紧急通道：取数 → 简单归因 → 输出（标注"紧急初稿，
 
 | 对象 | 路径 | 大小 | 重要性 |
 |------|------|------|--------|
-| 技能 | `~/.workbuddy/skills/cfo-command-center/` | ~12KB | 高（调度逻辑核心） |
-| 知识库 | `~/.workbuddy/financeos-kb/` | ~128KB | 高（积累的经验和规则） |
-| 缓冲区 | `~/.workbuddy/financeos-kb/数据缓冲区/` | 可变 | 低（临时数据，可不备份） |
+| 技能 | `{FINANCEOS_SKILL_DIR}/` | ~12KB | 高（调度逻辑核心） |
+| 知识库 | `{FINANCEOS_KB_ROOT}/` | ~128KB | 高（积累的经验和规则） |
+| 缓冲区 | `{FINANCEOS_KB_ROOT}/数据缓冲区/` | 可变 | 低（临时数据，可不备份） |
 
 **总备份量**：约 140KB，极小，每次全量备份即可。
 
@@ -394,10 +402,10 @@ BACKUP_DIR="D:/1_Documents/AiWorkSpace/financeos-backup/$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$BACKUP_DIR"
 
 # 备份技能
-cp -r ~/.workbuddy/skills/cfo-command-center/ "$BACKUP_DIR/cfo-command-center/"
+cp -r {FINANCEOS_SKILL_DIR}/ "$BACKUP_DIR/cfo-command-center/"
 
 # 备份知识库（含缓冲区）
-cp -r ~/.workbuddy/financeos-kb/ "$BACKUP_DIR/financeos-kb/"
+cp -r {FINANCEOS_KB_ROOT}/ "$BACKUP_DIR/financeos-kb/"
 
 # 验证备份
 echo "=== 备份验证 ==="
@@ -419,10 +427,10 @@ BACKUP_DIR="D:/1_Documents/AiWorkSpace/financeos-backup/incremental_$(date +%Y%m
 mkdir -p "$BACKUP_DIR"
 
 # 只备份会变化的库（L3案例库 + L4决策日志 + 数据缓冲区 + L2.5任务模板）
-cp -r ~/.workbuddy/financeos-kb/L3-案例库/ "$BACKUP_DIR/"
-cp -r ~/.workbuddy/financeos-kb/L4-决策日志/ "$BACKUP_DIR/"
-cp -r ~/.workbuddy/financeos-kb/L2.5-任务模板库/ "$BACKUP_DIR/"
-cp -r ~/.workbuddy/financeos-kb/数据缓冲区/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/L3-案例库/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/L4-决策日志/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/L2.5-任务模板库/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/数据缓冲区/ "$BACKUP_DIR/"
 
 echo "增量备份完成: $BACKUP_DIR"
 ```
@@ -449,14 +457,14 @@ ls -lt D:/1_Documents/AiWorkSpace/financeos-backup/ | head -5
 
 # 2. 恢复知识库
 BACKUP="D:/1_Documents/AiWorkSpace/financeos-backup/20260731_020000"  # 替换为实际备份目录
-cp -r "$BACKUP/financeos-kb/" ~/.workbuddy/financeos-kb/
+cp -r "$BACKUP/financeos-kb/" {FINANCEOS_KB_ROOT}/
 
 # 3. 恢复技能
-cp -r "$BACKUP/cfo-command-center/" ~/.workbuddy/skills/cfo-command-center/
+cp -r "$BACKUP/cfo-command-center/" {FINANCEOS_SKILL_DIR}/
 
 # 4. 验证
-find ~/.workbuddy/financeos-kb/ -type f | wc -l
-cat ~/.workbuddy/skills/cfo-command-center/SKILL.md | head -5
+find {FINANCEOS_KB_ROOT}/ -type f | wc -l
+cat {FINANCEOS_SKILL_DIR}/SKILL.md | head -5
 ```
 
 **恢复后检查**：
@@ -505,7 +513,7 @@ ls -1dt */ | tail -n +11 | xargs rm -rf
 **现象**：AI 回答不符合财务总监指挥台的风格，不引用 L1/L2 规则
 
 **排查**：
-1. 确认技能文件存在：`ls ~/.workbuddy/skills/cfo-command-center/SKILL.md`
+1. 确认技能文件存在：`ls {FINANCEOS_SKILL_DIR}/SKILL.md`
 2. 重新发送启动指令：`加载 cfo-command-center 技能`
 3. 如果文件不存在，从备份恢复
 
@@ -514,7 +522,7 @@ ls -1dt */ | tail -n +11 | xargs rm -rf
 **现象**：AI 说"L1 异常阈值标准不存在"或引用路径错误
 
 **排查**：
-1. 检查目录结构：`find ~/.workbuddy/financeos-kb/ -type f`
+1. 检查目录结构：`find {FINANCEOS_KB_ROOT}/ -type f`
 2. 确认文件名无误（中文文件名，注意编码）
 3. 如果文件丢失，从备份恢复
 
@@ -545,7 +553,7 @@ ls -1dt */ | tail -n +11 | xargs rm -rf
 **处理**：缓冲区设计为即弃，可安全清理：
 ```bash
 # 清理缓冲区（保留目录结构）
-rm -rf ~/.workbuddy/financeos-kb/数据缓冲区/*
+rm -rf {FINANCEOS_KB_ROOT}/数据缓冲区/*
 ```
 
 **注意**：清理前确认没有正在进行的任务。缓冲区数据不跨会话保留，清理不影响知识库。
@@ -558,7 +566,7 @@ rm -rf ~/.workbuddy/financeos-kb/数据缓冲区/*
 
 | 场景 | 指令 |
 |------|------|
-| 完整启动（推进框架） | `加载 cfo-command-center 技能，读 ~/.workbuddy/financeos-kb/三库框架规范_v1.md，继续 V2.2 推进` |
+| 完整启动（推进框架） | `加载 cfo-command-center 技能，读 {FINANCEOS_KB_ROOT}/三库框架规范_v1.md，继续 V2.2 推进` |
 | 日常使用（跑分析） | `加载 cfo-command-center 技能，帮我做[任务名]` |
 | 查询（轻量） | `加载 cfo-command-center 技能，[直接问]` |
 
@@ -580,7 +588,7 @@ rm -rf ~/.workbuddy/financeos-kb/数据缓冲区/*
 | L2 | 报告模板 | AI 起草→总监确认 | 3模板，v1 |
 | L2.5 | 任务编排路径 | AI 提炼→总监确认 | 1模板，v0.9 |
 | L3 | 历史案例 | AI 自动提取 | 3案例 |
-| L4 | 决策记录 | T3+ 自动触发 | 1模板(空) |
+| L4 | 决策记录 | Gate-H+ 自动触发 | 1模板(空) |
 | 缓冲区 | 临时数据 | 自动即弃 | 可清理 |
 
 ### 8.4 备份速查
@@ -596,12 +604,12 @@ rm -rf ~/.workbuddy/financeos-kb/数据缓冲区/*
 ### 8.5 关键路径速查
 
 ```
-技能文件:    ~/.workbuddy/skills/cfo-command-center/SKILL.md
-框架规范:    ~/.workbuddy/financeos-kb/三库框架规范_v1.md
-L1 阈值:     ~/.workbuddy/financeos-kb/L1-规则库/异常阈值标准.md
-L2 月度模板: ~/.workbuddy/financeos-kb/L2-模板库/月度经营分析模板_v1.md
-L2.5 模板:   ~/.workbuddy/financeos-kb/L2.5-任务模板库/月度预算执行分析_任务模板_v0.9.md
-L4 模板:     ~/.workbuddy/financeos-kb/L4-决策日志/决策日志记录模板_v1.md
+技能文件:    {FINANCEOS_SKILL_DIR}/SKILL.md
+框架规范:    {FINANCEOS_KB_ROOT}/三库框架规范_v1.md
+L1 阈值:     {FINANCEOS_KB_ROOT}/L1-规则库/异常阈值标准.md
+L2 月度模板: {FINANCEOS_KB_ROOT}/L2-模板库/月度经营分析模板_v1.md
+L2.5 模板:   {FINANCEOS_KB_ROOT}/L2.5-任务模板库/月度预算执行分析_任务模板_v0.9.md
+L4 模板:     {FINANCEOS_KB_ROOT}/L4-决策日志/决策日志记录模板_v1.md
 备份目录:    D:/1_Documents/AiWorkSpace/financeos-backup/
 架构文档:    D:/1_Documents/AiWorkSpace/FinanceOS_V4.0_架构设计规范_优化版.md
 ```

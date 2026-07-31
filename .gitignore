@@ -5,6 +5,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+.trae/
 
 # WorkBuddy specific (not needed for other platforms)
 .workbuddy/
@@ -13,6 +14,14 @@ Thumbs.db
 *.tmp
 *.log
 
+# Installer / binary files (not part of the project)
+*.exe
+*.7z
+*.zip
+
 # Data staging - user input data (privacy protection)
 data-staging/input/*
 !data-staging/input/.gitkeep
+
+# Commit message temp file
+COMMIT_MSG.txt

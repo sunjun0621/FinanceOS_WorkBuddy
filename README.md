@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/version-2.3.0-blue" alt="version">
+<img src="https://img.shields.io/badge/version-2.4.0-blue" alt="version">
 <img src="https://img.shields.io/badge/license-MIT-green" alt="license">
 <img src="https://img.shields.io/badge/platform-All%20AI%20Platforms-purple" alt="platform">
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs">
@@ -11,7 +11,7 @@
 
 **Dual-Axis Cognitive Operating System for Enterprise Finance**
 
-[English](#) | [快速开始](#快速开始) | [架构设计](docs/architecture.md) | [贡献指南](CONTRIBUTING.md)
+[快速开始](#快速开始) | [架构设计](docs/architecture.md) | [运行手册](docs/operations-manual.md) | [贡献指南](CONTRIBUTING.md) | [更新日志](CHANGELOG.md)
 
 </div>
 
@@ -19,9 +19,9 @@
 
 ## 这是什么？
 
-**FinanceOS** 是一个为 AI 设计的"财务操作系统"——一套结构化的指令集和知识库，让 ChatGPT、Claude、WorkBuddy 或任何 AI 平台都能像一个真正的财务总监助手那样工作。
+**FinanceOS** 是一套**面向国企 CFO 的 AI 财务指令集**——由结构化的指令（`core/FINANCEOS_SYSTEM.md`）和知识库（`kb/`）组成，可运行在任何支持 Markdown 指令的 AI 平台（ChatGPT、Claude、WorkBuddy、Gemini、本地 LLM 等），让 AI 像一个真正的财务总监助手那样工作。
 
-不是又一个财务分析工具。**是一套让 AI "学会"财务总监工作方式的操作系统。**
+不是又一个财务分析工具。**是一套让 AI "学会"财务总监工作方式的操作系统，与任何具体 AI 平台解耦。**
 
 ### 核心创新：双轴认知模型
 
@@ -65,7 +65,7 @@
 ### 完整安装
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/financeos.git
+git clone https://github.com/sunjun0621/FinanceOS_WorkBuddy.git financeos
 cd financeos
 # 阅读 docs/getting-started.md 了解领域适配
 ```
@@ -121,10 +121,13 @@ financeos/
 │   ├── claude/
 │   └── generic/
 ├── docs/                        ← 文档
-│   ├── architecture.md
-│   ├── getting-started.md
-│   ├── dual-axis-model.md
-│   └── domain-adaptation.md
+│   ├── architecture.md          # 架构设计
+│   ├── getting-started.md       # 快速开始（三步通用法 + 平台对照表）
+│   ├── operations-manual.md     # 运行手册（场景操作指南 + 备份维护）
+│   ├── kb-framework.md          # 三库框架规范
+│   ├── dual-axis-model.md       # 双轴认知模型
+│   ├── domain-adaptation.md     # 领域适配指南
+│   └── glossary.md              # 术语表
 ├── examples/                    ← 领域示例
 │   └── water-utility/
 ├── CONTRIBUTING.md              ← 贡献指南

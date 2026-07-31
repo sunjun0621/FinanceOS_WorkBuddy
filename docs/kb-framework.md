@@ -8,8 +8,10 @@
 
 ## 一、目录结构（已就位）
 
+> `{FINANCEOS_KB_ROOT}` = 知识库根目录（仓库内默认 `./kb/`；各平台部署路径见 `docs/getting-started.md` 平台对照表）
+
 ```
-~/.workbuddy/financeos-kb/
+{FINANCEOS_KB_ROOT}/
 ├── L1-规则库/          # 存规则：脱敏、权限、口径、格式
 ├── L2-模板库/           # 存模板：报告骨架、表格结构
 ├── L2.5-任务模板库/    # 存任务编排模板：高频任务的预设路径
@@ -125,12 +127,12 @@ L2.5任务模板 ──命中即跳过──> 意图识别（匹配到模板直�
 
 技能通过固定路径访问库：
 ```
-~/.workbuddy/financeos-kb/L1-规则库/
-~/.workbuddy/financeos-kb/L2-模板库/
-~/.workbuddy/financeos-kb/L2.5-任务模板库/
-~/.workbuddy/financeos-kb/L3-案例库/
-~/.workbuddy/financeos-kb/L4-决策日志/
-~/.workbuddy/financeos-kb/数据缓冲区/
+{FINANCEOS_KB_ROOT}/L1-规则库/
+{FINANCEOS_KB_ROOT}/L2-模板库/
+{FINANCEOS_KB_ROOT}/L2.5-任务模板库/
+{FINANCEOS_KB_ROOT}/L3-案例库/
+{FINANCEOS_KB_ROOT}/L4-决策日志/
+{FINANCEOS_KB_ROOT}/数据缓冲区/
 ```
 
 ---
@@ -151,7 +153,7 @@ L2.5任务模板 ──命中即跳过──> 意图识别（匹配到模板直�
 ## 八、本规范本身
 
 - **版本**：v1.0
-- **位置**：`~/.workbuddy/financeos-kb/三库框架规范_v1.md`
+- **位置**：`{FINANCEOS_KB_ROOT}/三库框架规范_v1.md`
 - **审阅重点**：第二~六节（库定位、引用关系、准入规则、更新规则、与技能衔接）
 - **更新条件**：库结构调整、引用机制变化、准入/更新规则变化
 

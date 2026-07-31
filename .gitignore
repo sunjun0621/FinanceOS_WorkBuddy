@@ -12,3 +12,7 @@ Thumbs.db
 # Temp files
 *.tmp
 *.log
+
+# Data staging - user input data (privacy protection)
+data-staging/input/*
+!data-staging/input/.gitkeep

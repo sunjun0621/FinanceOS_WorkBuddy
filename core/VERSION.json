@@ -1,6 +1,6 @@
 {
-  "version": "2.2.0",
-  "codename": "Dual-Axis Cognitive OS",
+  "version": "2.3.0",
+  "codename": "Community Knowledge Merge",
   "release_date": "2026-07-31",
   "status": "stable",
   "compatibility": {
@@ -9,6 +9,7 @@
     "recommended_context_window": 8000
   },
   "changelog": [
+    "v2.3: Merged knowledge from 3 repos — L1 rules 3→8, L2 templates 3→7, L3 cases 4→11; added data-staging area; added KB contribution templates",
     "v2.2: Simplified audit layer (delegated to internal audit dept), merged roles 7→5, lifecycle 6→5",
     "v2.1: Added STOP gate presets, emergency channel refinement",
     "v2.0: Merged Dumat gstack paradigm into FinanceOS",

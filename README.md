@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/version-2.2.0-blue" alt="version">
+<img src="https://img.shields.io/badge/version-2.3.0-blue" alt="version">
 <img src="https://img.shields.io/badge/license-MIT-green" alt="license">
 <img src="https://img.shields.io/badge/platform-All%20AI%20Platforms-purple" alt="platform">
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs">
@@ -81,14 +81,20 @@ graph TB
     Director --> Capability[能力层 · AI会什么]
     Director --> Workflow[流程层 · 事怎么做]
     
-    Governance --> L1[L1 规则库]
-    Capability --> L2[L2 模板库]
+    Governance --> L1[L1 规则库 · 8条]
+    Capability --> L2[L2 模板库 · 7个]
     Workflow --> L2.5[L2.5 任务模板]
-    Capability --> L3[L3 案例库]
+    Capability --> L3[L3 案例库 · 11个]
     Governance --> L4[L4 决策日志]
     
     Director -.-> Buffer[数据缓冲区 · 只读即弃]
+    Buffer -.-> Staging[data-staging · 数据过渡空间]
+    Staging -.-> User[用户数据输入]
     Buffer -.-> ERP[企业ERP/财务系统]
+    
+    Contrib[_contrib · 贡献模板] -.-> L1
+    Contrib -.-> L2
+    Contrib -.-> L3
 ```
 
 ---
@@ -98,13 +104,17 @@ graph TB
 ```
 financeos/
 ├── core/
-│   └── FINANCEOS_SYSTEM.md     ← 🔑 核心指令集（平台无关）
-├── kb/                          ← 知识库（领域示例：水务/公用事业）
-│   ├── L1-rules/                # 红线规则（脱敏、权限、异常阈值）
-│   ├── L2-templates/            # 报告/表格模板
+│   └── FINANCEOS_SYSTEM.md     ← 核心指令集（平台无关）
+├── kb/                          ← 知识库（通用国企财务领域）
+│   ├── _contrib/                # 社区贡献模板（降低贡献门槛）
+│   ├── L1-rules/                # 红线规则（8条：脱敏、权限、阈值、输出、资金、成本、监管、科目）
+│   ├── L2-templates/            # 报告/表格模板（7个：月度、季度、专项、董事会、资金、公文格式、现金流分析）
 │   ├── L2.5-task-templates/     # 高频任务预设编排
-│   ├── L3-cases/                # 历史处理经验
+│   ├── L3-cases/                # 历史处理经验（11个案例）
 │   └── L4-decision-logs/        # 决策记录模板
+├── data-staging/                ← 数据过渡空间（非ERP用户输入通道）
+│   ├── templates/               # CSV数据模板（预算表、利润表、资产负债表）
+│   └── input/                   # 放入待处理数据（已加入.gitignore）
 ├── adapters/                    ← 各 AI 平台适配器
 │   ├── workbuddy/
 │   ├── chatgpt/

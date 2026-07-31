@@ -1,0 +1,3 @@
+# 数据文件不提交到 Git
+input/*
+!input/.gitkeep

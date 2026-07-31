@@ -1,0 +1,17 @@
+{
+  "version": "2.2.0",
+  "codename": "Dual-Axis Cognitive OS",
+  "release_date": "2026-07-31",
+  "status": "stable",
+  "compatibility": {
+    "ai_platforms": ["ChatGPT", "Claude", "WorkBuddy", "Gemini", "Local LLM"],
+    "minimum_context_window": 4000,
+    "recommended_context_window": 8000
+  },
+  "changelog": [
+    "v2.2: Simplified audit layer (delegated to internal audit dept), merged roles 7→5, lifecycle 6→5",
+    "v2.1: Added STOP gate presets, emergency channel refinement",
+    "v2.0: Merged Dumat gstack paradigm into FinanceOS",
+    "v1.0: Initial GPT-based enterprise architecture"
+  ]
+}

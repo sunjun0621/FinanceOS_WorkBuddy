@@ -1,0 +1,14 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# WorkBuddy specific (not needed for other platforms)
+.workbuddy/
+
+# Temp files
+*.tmp
+*.log

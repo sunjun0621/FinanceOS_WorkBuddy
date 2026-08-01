@@ -68,11 +68,17 @@ def read_lines(filepath: Path) -> List[str]:
 
 
 def list_md_files(root: Path) -> List[Path]:
-    """List all .md files excluding .git and node_modules."""
+    """List all .md files excluding VCS/IDE/dependency directories.
+
+    Skips .git, .trae, .vscode, .idea and other dot-dirs so that local IDE
+    planning notes (gitignored, not part of the shipped project) don't trigger
+    false term-consistency errors during local validation.
+    """
+    skip_dirs = {".git", ".trae", ".vscode", ".idea", "node_modules", "__pycache__"}
     result = []
     for p in root.rglob("*.md"):
-        parts = str(p.relative_to(root))
-        if ".git" in parts or "node_modules" in parts:
+        parts = set(p.relative_to(root).parts)
+        if parts & skip_dirs:
             continue
         result.append(p)
     return result
@@ -407,9 +413,16 @@ def check_adapters(root: Path, result: ValidationResult):
     if adapters_readme.exists():
         lines = read_lines(adapters_readme)
         for line in lines:
+            # First column: display name (e.g. "WorkBuddy", "通用")
             m = re.search(r"\|\s*\[?(\w+)\]?\s*\|.*\|", line)
             if m and m.group(1) not in ("平台", "Platform", "---"):
                 registered.add(m.group(1).lower())
+            # Second column: directory link (e.g. "[generic/](generic/)")
+            # — registers the actual directory name so a Chinese display name
+            # like "通用" still maps to its real dir "generic".
+            d = re.search(r"\]\(([^)/]+)/?\)", line)
+            if d:
+                registered.add(d.group(1).lower())
 
     for item in adapters_dir.iterdir():
         if not item.is_dir() or item.name.startswith("."):

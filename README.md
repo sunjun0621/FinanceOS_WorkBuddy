@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/version-2.4.0-blue" alt="version">
+<img src="https://img.shields.io/badge/version-2.4.1-blue" alt="version">
 <img src="https://img.shields.io/badge/license-MIT-green" alt="license">
 <img src="https://img.shields.io/badge/platform-All%20AI%20Platforms-purple" alt="platform">
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs">
@@ -70,7 +70,7 @@
 | `/gongwen` 或 "起草公文" | 符合 GB/T 9704 的标准公文 |
 | `/ask` 或 "什么是产销差率" | 秒回 + 引用 KB 来源标注 |
 
-> 5 个开箱即用技能见 [`skills/`](skills/) 目录，来源均为 GitHub 高赞开源项目（MIT / Apache-2.0），可溯源。详见 [`skills/README.md`](skills/README.md)。
+> 5 个开箱即用技能见 [`skills/`](skills/) 目录：4 个方法论参考 GitHub 开源项目（MIT / Apache-2.0，可溯源），1 个（现金流分析）为 FinanceOS 原创。详见 [`skills/README.md`](skills/README.md)。
 
 ### 完整安装
 

@@ -30,7 +30,7 @@ FinanceOS 预制 SKILL 是一组**开箱即用**的 AI 财务技能。每个 SKI
 |---|------|--------|---------|---------|---------|
 | 1 | [月度经营分析](monthly-analysis/) · *旗舰演示* | `/monthly` | Gate-M | L2 月度模板 + L1 异常阈值 + L2.5 任务模板 | FinRobot (Apache-2.0) |
 | 2 | [预算差异归因](budget-variance/) | `/variance` | Gate-M | L3 case-006 + L1 异常阈值 | actualbudget (MIT) |
-| 3 | [现金流分析](cashflow-analysis/) | `/cashflow` | Gate-M | L2 现金流模板 + L3 case-005 | dexter (MIT) |
+| 3 | [现金流分析](cashflow-analysis/) | `/cashflow` | Gate-M | L2 现金流模板 + L3 case-005 | FinanceOS 原创 |
 | 4 | [公文起草](document-drafting/) | `/gongwen` | Gate-M → Gate-H | L2 GB/T 9704 规范 | wenshu (MIT) |
 | 5 | [财务知识问答](knowledge-qa/) | `/ask` | Gate-L | L1 全部规则 + L3 案例库 + 术语表 | awesome-chatgpt-prompts-zh (MIT) |
 
@@ -40,13 +40,13 @@ FinanceOS 预制 SKILL 是一组**开箱即用**的 AI 财务技能。每个 SKI
 
 ## 来源合规性
 
-所有 SKILL 的方法论 / 工作流范式参考自 GitHub 开源项目，**全部为 MIT 或 Apache-2.0 许可**（开源世界最友好的两种许可证）。FinanceOS 提取的是**工作流范式**而非代码，SKILL.md 内容为 FinanceOS 原创。
+4 个 SKILL 的方法论 / 工作流范式参考自 GitHub 开源项目，**均为 MIT 或 Apache-2.0 许可**（开源世界最友好的两种许可证）；现金流分析 SKILL 为 FinanceOS 原创（无外部来源项目）。FinanceOS 提取的是**工作流范式**而非代码，SKILL.md 内容为 FinanceOS 原创。
 
 | SKILL | 来源项目 | 许可证 | 提取价值 |
 |------|---------|--------|---------|
 | 月度经营分析 | [AI4Finance-Foundation/FinRobot](https://github.com/AI4Finance-Foundation/FinRobot) | Apache-2.0 | "感知→建模→综合→报告" 四阶段范式 |
 | 预算差异归因 | [actualbudget/actual](https://github.com/actualbudget/actual) | MIT | 信封预算法差异追踪闭环 |
-| 现金流分析 | [virattt/dexter](https://github.com/virattt/dexter) | MIT | "分解→取数→分析→自验证→精炼" 范式 |
+| 现金流分析 | —（FinanceOS 原创） | — | 现金流背离归因：三类差异分解 + 三分法归因 + 交叉验证 |
 | 公文起草 | [Aether-liusiqi/wenshu](https://github.com/Aether-liusiqi/wenshu) | MIT | 6 步公文写作工作流 + 15 法定文种结构 |
 | 财务知识问答 | [PlexPt/awesome-chatgpt-prompts-zh](https://github.com/PlexPt/awesome-chatgpt-prompts-zh) | MIT | 角色 Prompt 结构（角色定义→知识边界→回答规范） |
 
@@ -90,4 +90,4 @@ skills/
 
 ---
 
-*— FinanceOS 预制 SKILL 体系 v2.4 —*
+*— FinanceOS 预制 SKILL 体系 v2.4.1 —*

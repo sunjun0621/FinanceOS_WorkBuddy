@@ -42,8 +42,8 @@ MAJOR.MINOR.PATCH
 
 | 组件 | 版本位置 | 当前基准 |
 |------|---------|---------|
-| `core/FINANCEOS_SYSTEM.md` | 文件标题 `v2.4` | 与项目版本同步 |
-| `adapters/workbuddy/SKILL.md` | frontmatter `version: v2.4` | 与项目版本同步 |
+| `core/FINANCEOS_SYSTEM.md` | 文件标题 `v2.4.1` | 与项目版本同步 |
+| `adapters/workbuddy/SKILL.md` | frontmatter `version: v2.4.1` | 与项目版本同步 |
 | 各 KB 条目 | 文件元数据头 `> 版本：vX.Y` | 独立递进 |
 
 ### 1.3 版本一致性铁律

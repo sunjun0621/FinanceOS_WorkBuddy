@@ -27,7 +27,7 @@
 
 ## 来源
 
-virattt/dexter（MIT）· 详见 [SKILL.md](SKILL.md) 第六节
+FinanceOS 原创（无外部来源项目）· 详见 [SKILL.md](SKILL.md) 第六节
 
 ## 关联知识库
 

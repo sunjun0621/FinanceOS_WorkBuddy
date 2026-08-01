@@ -1,8 +1,8 @@
 ---
 name: document-drafting
-version: v2.4
+version: v2.4.1
 description: 公文起草·按GB/T 9704-2012格式起草报告/请示/函,6步工作流+15法定文种
-trigger: /gongwen | 公文 | 起草报告 | 写请示
+trigger: /gongwen | 起草公文 | 公文 | 起草报告 | 写请示
 source: Aether-liusiqi/wenshu (https://github.com/Aether-liusiqi/wenshu, MIT)
 license: 本 SKILL 为 FinanceOS 原创,提取来源项目工作流范式,非复制代码
 ---
@@ -19,7 +19,7 @@ license: 本 SKILL 为 FinanceOS 原创,提取来源项目工作流范式,非复
 | 风险等级 | Gate-M 分析研究（起草）；对外报送升 Gate-H（脱敏+留痕） |
 | 预期耗时 | 约 5-10 分钟 |
 | 产出物 | 符合 GB/T 9704-2012 的公文（Markdown，标注字体字号映射） |
-| 触发词 | `/gongwen`、公文、起草报告、写请示 |
+| 触发词 | `/gongwen`、起草公文、公文、起草报告、写请示 |
 | 输入 | examples/sample-report.md（示范）或用户：公文类型 + 核心内容要点 |
 | 模式 | 完整模式 |
 

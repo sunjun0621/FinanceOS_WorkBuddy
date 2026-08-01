@@ -1,6 +1,6 @@
 ---
 name: cfo-command-center
-version: v2.4
+version: v2.4.1
 description: 财务总监指挥台 · FinanceOS 双轴认知操作系统的调度中枢。接收自然语言工作指令，按"模式判别→意图识别→双轴编排→STOP gate"路由调度五阶段闭环。只调度不判断，只发现不决策。
 ---
 

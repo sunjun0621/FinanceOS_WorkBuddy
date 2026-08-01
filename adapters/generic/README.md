@@ -48,5 +48,5 @@ ollama run financeos
 4. 校验强制：勾稽/异常/口径/格式四项不跳过
 5. 缓冲区数据只读即弃，不沉淀
 
-详细规则见 [完整版](core/FINANCEOS_SYSTEM.md)
+详细规则见 [完整版](../../core/FINANCEOS_SYSTEM.md)
 ```

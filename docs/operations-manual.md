@@ -1,7 +1,7 @@
-# FinanceOS V2.4 运行手册
+# FinanceOS V2.4.1 运行手册
 
-> 版本：v2.4 · 2026-07-31
-> 适用：cfo-command-center v4.1 + 三库框架 v1.0
+> 版本：v2.4.1 · 2026-08-01
+> 适用：cfo-command-center v2.4.1 + 三库框架 v1.0
 > 位置：`{FINANCEOS_SKILL_DIR}/` + `{FINANCEOS_KB_ROOT}/`
 >
 > **路径变量说明**（v2.4 去平台化）：
@@ -178,7 +178,7 @@ AI 会自动完成：
 
 | 检查项 | 方法 | 预期结果 |
 |--------|------|---------|
-| 技能是否加载 | 问 AI "当前加载了什么技能" | 回答含 cfo-command-center v2.4 |
+| 技能是否加载 | 问 AI "当前加载了什么技能" | 回答含 cfo-command-center v2.4.1 |
 | 知识库是否可读 | 问 AI "L1 有哪些文件" | 列出 data-masking / permission-tiers / anomaly-thresholds 等 |
 | L2.5 模板是否就位 | 问 AI "月度预算执行分析模板版本" | monthly-budget-analysis.md |
 | L3 案例数 | 问 AI "案例库有几条" | 11条 |
@@ -477,7 +477,7 @@ cat {FINANCEOS_SKILL_DIR}/SKILL.md | head -5
 
 | 组件 | 版本 | 文件数 | 最后更新 |
 |------|------|--------|---------|
-| cfo-command-center 技能 | v2.4 | 1 (SKILL.md) | 2026-07-31 |
+| cfo-command-center 技能 | v2.4.1 | 1 (SKILL.md) | 2026-08-01 |
 | KB README (索引) | v1 | 1 | 2026-07-31 |
 | L1 规则库 | v2 (data-masking) / v2.0 (permission-tiers) / v1.1 (anomaly-thresholds) | 8 | 2026-07-31 |
 | L2 模板库 | v1 | 7 | 2026-07-31 |

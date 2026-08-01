@@ -1,4 +1,4 @@
-# FinanceOS System Prompt v2.4
+# FinanceOS System Prompt v2.4.1
 
 > **AI 财务操作系统 · 平台无关指令集**
 > 
@@ -175,4 +175,4 @@ FinanceOS 的核心框架是**领域无关的**。适配新领域只需：
 
 ---
 
-*— FinanceOS System Prompt v2.4 —*
+*— FinanceOS System Prompt v2.4.1 —*

@@ -1,6 +1,6 @@
 ---
 name: knowledge-qa
-version: v2.4
+version: v2.4.1
 description: 财务知识问答·轻量入口,随手问财务概念/政策/准则,AI秒回+引用KB来源标注
 trigger: /ask | 什么是... | 解释一下... | 查一下...
 source: PlexPt/awesome-chatgpt-prompts-zh (https://github.com/PlexPt/awesome-chatgpt-prompts-zh, MIT)

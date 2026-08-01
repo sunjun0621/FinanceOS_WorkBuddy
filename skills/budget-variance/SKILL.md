@@ -1,8 +1,8 @@
 ---
 name: budget-variance
-version: v2.4
+version: v2.4.1
 description: 预算差异归因·CFO月末高频任务,量价双因素分解+颜色标注+归因链+改进建议
-trigger: /variance | 预算差异 | 偏差归因
+trigger: /variance | 预算差异归因 | 预算差异 | 偏差归因
 source: actualbudget/actual (https://github.com/actualbudget/actual, ~27.7k★, MIT)
 license: 本 SKILL 为 FinanceOS 原创,提取来源项目工作流范式,非复制代码
 ---
@@ -19,7 +19,7 @@ license: 本 SKILL 为 FinanceOS 原创,提取来源项目工作流范式,非复
 | 风险等级 | Gate-M 分析研究（默认内部分析） |
 | 预期耗时 | 约 10-15 分钟 |
 | 产出物 | 预算差异归因报告（Markdown，含分科目对比表 + 量价分解 + 归因链 + 改进建议） |
-| 触发词 | `/variance`、预算差异、偏差归因 |
+| 触发词 | `/variance`、预算差异归因、预算差异、偏差归因 |
 | 输入 | examples/sample-data.json（已内置）或用户预算 vs 实际数据 |
 | 模式 | 完整模式 |
 

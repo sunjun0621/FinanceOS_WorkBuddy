@@ -1,8 +1,8 @@
 ---
 name: monthly-analysis
-version: v2.4
+version: v2.4.1
 description: 月度经营分析·旗舰演示技能,读示例数据30秒跑出带三色预警标注的八章节报告
-trigger: /monthly | 月度分析 | 帮我做月度经营分析
+trigger: /monthly | 月度经营分析 | 月度分析 | 帮我做月度经营分析
 source: FinRobot (AI4Finance-Foundation/FinRobot, https://github.com/AI4Finance-Foundation/FinRobot, ~7.6k★, Apache-2.0)
 license: 本 SKILL 为 FinanceOS 原创,提取来源项目工作流范式,非复制代码
 ---
@@ -19,7 +19,7 @@ license: 本 SKILL 为 FinanceOS 原创,提取来源项目工作流范式,非复
 | 风险等级 | Gate-M 分析研究（默认内部分析，不脱敏，关键节点确认） |
 | 预期耗时 | 五阶段串行，约 15-20 分钟（含校验） |
 | 产出物 | 月度经营分析报告（Markdown，八章节，含三色预警标注） |
-| 触发词 | `/monthly`、月度分析、帮我做月度经营分析 |
+| 触发词 | `/monthly`、月度经营分析、月度分析、帮我做月度经营分析 |
 | 输入 | examples/sample-data.json（已内置）或用户粘贴的月度数据 |
 | 模式 | 完整模式（含产出物意图 → 启动角色编排） |
 

@@ -2,6 +2,19 @@
 
 All notable changes to FinanceOS will be documented in this file.
 
+## [2.4.1] - 2026-08-01
+
+### Fixed
+- 修复 `adapters/generic/README.md` 最小化安装示例中的断链：`core/FINANCEOS_SYSTEM.md` → `../../core/FINANCEOS_SYSTEM.md`（原相对路径在 GitHub 上 404）
+- 修复 `tools/validate_kb.py` 误扫 `.trae/` 等 IDE 目录导致本地校验误报 8 个 T1-T4 ERROR 的问题：`list_md_files` 现跳过 `.git` / `.trae` / `.vscode` / `.idea` / `node_modules` / `__pycache__`，本地 QA 不再被 gitignore 的规划文档污染
+- 修复 `tools/validate_kb.py` 对 generic 适配器误报 "not registered" 的问题：注册检查现同时解析 `adapters/README.md` 表格第二列的目录链接，使中文显示名"通用"正确映射到真实目录 `generic`
+- 补全 `INSTALL.md` 验证步骤的触发词表（3/5 → 5/5，补 `/gongwen`、`/ask`），与 README.md / skills/README.md 保持一致
+- 清理 KB 与文档中残留的 cfo-command-center 旧内部版本号引用（`v4.1` → `v2.4.1`）：`docs/operations-manual.md` 适用版本、`docs/kb-framework.md` 衔接机制标题、`kb/L1-rules/anomaly-thresholds.md` 与 `kb/L4-decision-logs/template.md` 的章节关联（`kb-framework.md` 推进进度日志中的 `v4.1` 作为 2026-07-30 dated 历史记录保留）
+- 修正现金流分析 SKILL 的来源合规声称：原标注来源 `virattt/dexter` 为 MIT 许可，实际该仓库无任何 LICENSE 文件（GitHub API `/repos/virattt/dexter/license` 返回 404，默认 All Rights Reserved），违反"来源项目须 MIT/Apache-2.0"硬约束。现将现金流分析 SKILL 重声明为 **FinanceOS 原创**方法论（无外部来源项目），同步更新 `skills/cashflow-analysis/SKILL.md`、`skills/README.md`、`README.md` 的来源与合规描述
+
+### Changed
+- 版本号 2.4.0 → 2.4.1，同步更新 VERSION.json / README badge / 系统指令标题 / 各 SKILL.md frontmatter / SPEC 当前基准 / operations-manual 版本戳
+
 ## [2.4.0] - 2026-07-31
 
 ### Changed — 去平台化（Block 2）

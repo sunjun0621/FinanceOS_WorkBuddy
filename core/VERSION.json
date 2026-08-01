@@ -1,7 +1,7 @@
 {
-  "version": "2.4.0",
-  "codename": "Platform Decoupling & Gate Refinement",
-  "release_date": "2026-07-31",
+  "version": "2.4.1",
+  "codename": "Bugfix & Validator Hardening",
+  "release_date": "2026-08-01",
   "status": "stable",
   "compatibility": {
     "ai_platforms": ["WorkBuddy", "ChatGPT", "Claude", "Generic"],
@@ -11,6 +11,7 @@
   },
   "kb_root_variable": "FINANCEOS_KB_ROOT",
   "changelog": [
+    "v2.4.1: Bugfix release — fix broken core link in adapters/generic/README.md (404 on GitHub); harden validate_kb.py to skip .trae/.vscode/.idea IDE dirs (was false-failing local QA with 8 T1-T4 errors) and to map Chinese adapter display name to its real directory (fix false 'generic not registered' warning); complete INSTALL.md trigger-word table (3/5 -> 5/5); version bump 2.4.0 -> 2.4.1",
     "v2.4: Platform decoupling (remove QoderWork/DuMate residuals, generalize hardcoded paths to {FINANCEOS_KB_ROOT}); SKILL.md prompt simplification (>=30% reduction); STOP Gate refined from T1-T4 to Gate-L/M/H/X four-level with new Gate-X prohibition tier; Pre-built SKILL system (5 out-of-the-box skills with desensitized sample data: monthly-analysis/budget-variance/cashflow-analysis/document-drafting/knowledge-qa, methodology sourced from MIT/Apache-2.0 GitHub projects, 30s to first report)",
     "v2.3: Merged knowledge from 3 repos — L1 rules 3→8, L2 templates 3→7, L3 cases 4→11; added data-staging area; added KB contribution templates",
     "v2.2: Simplified audit layer (delegated to internal audit dept), merged roles 7→5, lifecycle 6→5",

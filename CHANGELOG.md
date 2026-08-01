@@ -28,7 +28,7 @@ All notable changes to FinanceOS will be documented in this file.
 - **L1 Rules** (3 → 8): output-standards, fund-management, cost-control, regulatory-requirements, chart-of-accounts
 - **L2 Templates** (3 → 7): board-materials, fund-plan, gb-t9704-spec, cash-flow-analysis
 - **L3 Cases** (4 → 11): profit-vs-cashflow, budget-variance, ar-risk, investment, tax-risk, cost-overrun, capex-variance (DuMate revenue-variance merged into budget-variance)
-- **Data Staging Area** (`data-staging/`): dedicated input channel for non-ERP users with CSV templates (budget, income statement, balance sheet)
+- **Data Staging Area** (`data-buffer/`): dedicated input channel for non-ERP users with CSV templates (budget, income statement, balance sheet)
 - **KB Contribution Templates** (`kb/_contrib/`): rule/template/case templates + pre-submission checklist to lower community contribution barrier
 - Enhanced data-masking rule: 9 → 12 categories, dual-scheme mechanism (A/B), anti-inference protection
 - GB/T 9704-2012 document format specification for compliant report generation
@@ -38,7 +38,7 @@ All notable changes to FinanceOS will be documented in this file.
 - permission-tiers.md supplemented with DuMate 4-level data classification matrix (L1-L4)
 - Merged DuMate revenue-variance into case-006; merged DuMate rigid-spending & flood-emergency into case-002
 - KB README updated with complete file index; README counts corrected to L2=7, L3=11
-- Core system prompt bumped to v2.3; added data-staging reference in domain-adaptation guide
+- Core system prompt bumped to v2.3; added data-buffer reference in domain-adaptation guide
 
 ### Sources
 - Knowledge content merged from FinanceOS_WorkBuddy (battle-tested rules, templates, cases)

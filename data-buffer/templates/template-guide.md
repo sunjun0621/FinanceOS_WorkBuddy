@@ -1,7 +1,7 @@
 # 数据模板填写指南 / Data Template Guide
 
-> 适用于 FinanceOS_WorkBuddy 数据暂存区（data-staging）的三套标准模板。
-> Applicable to the three standard templates in the FinanceOS_WorkBuddy data-staging area.
+> 适用于 FinanceOS_WorkBuddy 数据暂存区（data-buffer）的三套标准模板。
+> Applicable to the three standard templates in the FinanceOS_WorkBuddy data-buffer area.
 
 ---
 
@@ -241,8 +241,8 @@ Used to prepare a standard PRC balance sheet, supporting solvency analysis and f
 
 ## 7. 数据提交流程 / Submission Workflow
 
-数据模板的使用遵循 data-staging 区域的统一工作流。详细流程请参阅 `data-staging/README.md`。
-Template usage follows the unified workflow of the data-staging area. For the full workflow, refer to `data-staging/README.md`.
+数据模板的使用遵循 data-buffer 区域的统一工作流。详细流程请参阅 `data-buffer/README.md`。
+Template usage follows the unified workflow of the data-buffer area. For the full workflow, refer to `data-buffer/README.md`.
 
 ### 简要流程 / Quick Workflow
 
@@ -257,11 +257,11 @@ Template usage follows the unified workflow of the data-staging area. For the fu
    Name file: {type}_{period}_{entity}.csv
    例 / Example: income-statement_2024H1_集团公司.csv
        |
-5. 上传至 data-staging/incoming/ 目录
-   Upload to data-staging/incoming/ directory
+5. 放入 data-buffer/input/ 目录
+   Place into data-buffer/input/ directory
        |
-6. 系统自动校验并移入 processed/ 目录
-   System auto-validates and moves to processed/ directory
+6. AI 读取处理后，产出放入 output/ 目录
+   AI reads and processes; output goes to output/ directory
 ```
 
 ### 文件命名规范 / File Naming Convention

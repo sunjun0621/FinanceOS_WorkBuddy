@@ -24,7 +24,31 @@
 
 ## KB 贡献规范
 
-FinanceOS 的知识库（KB）按约束力分为四级，贡献前请确认你的内容属于哪一级：
+FinanceOS 的知识库（KB）按约束力分为四级，贡献前请确认你的内容属于哪一级。
+详细的命名、格式和 Schema 规范见 [SPEC.md](SPEC.md)。
+
+### 文件命名
+
+所有 KB 条目文件使用**全小写英文 + 连字符**（kebab-case），不包含版本号：
+- L1 规则：`{descriptive-name}.md`（如 `anomaly-thresholds.md`）
+- L2 模板：`{report-type}.md`（如 `monthly-analysis.md`）
+- L3 案例：`case-{NNN}-{description}.md`（如 `case-001-monthly.md`）
+- L4 决策日志：`DEC-YYYYMMDD-NNN_{description}.md`
+
+### 元数据头
+
+新增条目**必须**使用 YAML frontmatter（详见 [SPEC.md §3](SPEC.md#3-kb-条目-schema)）：
+
+```yaml
+---
+id: your-entry-id
+level: L1
+name: 条目中文名
+version: "1.0"
+date: "2026-07-31"
+status: active
+---
+```
 
 ### L1 规则库（强制约束·红线）
 - **准入条件**：可复用、跨任务稳定、有明确判断标准
@@ -74,9 +98,12 @@ FinanceOS 的知识库（KB）按约束力分为四级，贡献前请确认你�
 - [ ] 知识库（kb/）
 - [ ] 适配器（adapters/）
 - [ ] 文档（docs/）
+- [ ] 规范（SPEC.md）
 
-## 测试
-- [ ] 在至少一个 AI 平台上验证通过
+## 校验
+- [ ] 运行 `python tools/validate_kb.py` 通过
+- [ ] 版本号一致性检查通过
+- [ ] 在至少一个 AI 平台上验证通过（KB/适配器变更时）
 - [ ] KB 引用关系检查无断裂
 ```
 

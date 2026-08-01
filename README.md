@@ -60,7 +60,17 @@
 | **WorkBuddy** | 安装 `adapters/workbuddy/SKILL.md` |
 | **通用** | 粘贴到 System Prompt，手动提及 `kb/` 目录 |
 
-4. 对 AI 说：**"帮我做月度经营分析"**
+4. 对 AI 说任一**预制 SKILL 触发词**（示例数据已内置，30 秒出报告）：
+
+| 触发词 | 效果 |
+|---------|------|
+| `/monthly` 或 "月度经营分析" | 八章节月度经营分析报告（含 🟡🟠🔴 三色预警） |
+| `/variance` 或 "预算差异归因" | 分科目量价归因链 + 改进建议 |
+| `/cashflow` 或 "现金流分析" | 利润与现金流背离归因报告 |
+| `/gongwen` 或 "起草公文" | 符合 GB/T 9704 的标准公文 |
+| `/ask` 或 "什么是产销差率" | 秒回 + 引用 KB 来源标注 |
+
+> 5 个开箱即用技能见 [`skills/`](skills/) 目录，来源均为 GitHub 高赞开源项目（MIT / Apache-2.0），可溯源。详见 [`skills/README.md`](skills/README.md)。
 
 ### 完整安装
 
@@ -88,7 +98,7 @@ graph TB
     Governance --> L4[L4 决策日志]
     
     Director -.-> Buffer[数据缓冲区 · 只读即弃]
-    Buffer -.-> Staging[data-staging · 数据过渡空间]
+    Buffer -.-> Staging[data-buffer · 数据过渡空间]
     Staging -.-> User[用户数据输入]
     Buffer -.-> ERP[企业ERP/财务系统]
     
@@ -104,7 +114,8 @@ graph TB
 ```
 financeos/
 ├── core/
-│   └── FINANCEOS_SYSTEM.md     ← 核心指令集（平台无关）
+│   ├── FINANCEOS_SYSTEM.md     ← 核心指令集（平台无关）
+│   └── VERSION.json            ← 版本真相源
 ├── kb/                          ← 知识库（通用国企财务领域）
 │   ├── _contrib/                # 社区贡献模板（降低贡献门槛）
 │   ├── L1-rules/                # 红线规则（8条：脱敏、权限、阈值、输出、资金、成本、监管、科目）
@@ -112,14 +123,22 @@ financeos/
 │   ├── L2.5-task-templates/     # 高频任务预设编排
 │   ├── L3-cases/                # 历史处理经验（11个案例）
 │   └── L4-decision-logs/        # 决策记录模板
-├── data-staging/                ← 数据过渡空间（非ERP用户输入通道）
+├── data-buffer/                ← 数据缓冲区（用户数据入口，非ERP用户输入通道）
 │   ├── templates/               # CSV数据模板（预算表、利润表、资产负债表）
 │   └── input/                   # 放入待处理数据（已加入.gitignore）
+├── output/                     ← 产出区（报告成果，已加入.gitignore）
+│   └── {日期}_{任务名}/        # 按任务归档
 ├── adapters/                    ← 各 AI 平台适配器
 │   ├── workbuddy/
 │   ├── chatgpt/
 │   ├── claude/
 │   └── generic/
+├── skills/                      ← 预制 SKILL 体系（5 个开箱即用，附示例数据）
+│   ├── monthly-analysis/        # 月度经营分析（旗舰演示）
+│   ├── budget-variance/         # 预算差异归因
+│   ├── cashflow-analysis/       # 现金流分析
+│   ├── document-drafting/       # 公文起草（GB/T 9704）
+│   └── knowledge-qa/            # 财务知识问答
 ├── docs/                        ← 文档
 │   ├── architecture.md          # 架构设计
 │   ├── getting-started.md       # 快速开始（三步通用法 + 平台对照表）
@@ -128,8 +147,12 @@ financeos/
 │   ├── dual-axis-model.md       # 双轴认知模型
 │   ├── domain-adaptation.md     # 领域适配指南
 │   └── glossary.md              # 术语表
+├── tools/
+│   └── validate_kb.py           ← KB 校验脚本（纯 Python 标准库）
 ├── examples/                    ← 领域示例
 │   └── water-utility/
+├── SPEC.md                      ← 规范文档（命名/版本/Schema/引用/适配器接口）
+├── INSTALL.md                   ← 安装指南（含平台兼容性表）
 ├── CONTRIBUTING.md              ← 贡献指南
 └── LICENSE                      ← MIT
 ```

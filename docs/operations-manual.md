@@ -28,7 +28,7 @@
 
 ### 1.1 这是什么
 
-FinanceOS V2.2 是为市属水务国企财务总监设计的 AI 认知操作系统。它不是单一工具，而是一套"调度中枢 + 知识底座 + 运行闭环"的工作体系：
+FinanceOS V2.4 是为市属水务国企财务总监设计的 AI 认知操作系统。它不是单一工具，而是一套"调度中枢 + 知识底座 + 运行闭环"的工作体系：
 
 - **调度中枢**：`cfo-command-center` 技能（AI 财务办公室主任 + 主动认知雷达）
 - **知识底座**：3+2 库（L1 规则 / L2 模板 / L2.5 任务模板 / L3 案例 / L4 决策日志 + 数据缓冲区）
@@ -40,27 +40,26 @@ FinanceOS V2.2 是为市属水务国企财务总监设计的 AI 认知操作系�
 {FINANCEOS_DEPLOY_ROOT}/   # 平台部署根（WorkBuddy 默认 ~/.workbuddy/；其他平台见 adapters/）
 ├── skills/cfo-command-center/SKILL.md          # 技能（调度逻辑）  ~12KB  ← 仓库 adapters/workbuddy/SKILL.md
 └── financeos-kb/                               # 知识库（内容底座）  ~128KB  ← 仓库 kb/
-    ├── 三库框架规范_v1.md                       # 总纲
-    ├── L1-规则库/
-    │   ├── 脱敏标准清单.md                      # 数据脱敏红线
-    │   ├── 权限分级.md                          # Gate-L/M/H/X 风险分层
-    │   └── 异常阈值标准.md                      # 分科目阈值 + 判定矩阵 v1.1
-    ├── L2-模板库/
-    │   ├── 月度经营分析模板_v1.md
-    │   ├── 季度财务分析报告模板_v1.md
-    │   └── 专项财务分析报告模板_v1.md
-    ├── L2.5-任务模板库/
-    │   └── 月度预算执行分析_任务模板_v0.9.md     # 高频任务编排路径
-    ├── L3-案例库/
-    │   ├── 月度预算执行分析_案例001.md           # 5月·淡季
-    │   ├── 月度预算执行分析_案例002_6月旺季.md   # 6月·旺季
-    │   └── 季度财务分析_案例003_Q2旺季.md        # Q2·季度
-    ├── L4-决策日志/
-    │   └── 决策日志记录模板_v1.md                # 空模板，待 Gate-H+ 触发
-    └── 数据缓冲区/                              # 临时数据，任务结束即弃
-        ├── 2026-07-30_月度预算执行分析/
-        ├── 2026-07-30_月度预算执行分析_6月数据/
-        └── 2026-07-30_季度财务分析_Q2/
+    ├── README.md                                 # KB 索引
+    ├── L1-rules/                                # 规则库
+    │   ├── data-masking.md                       # 数据脱敏红线
+    │   ├── permission-tiers.md                   # 权限分级 Gate-L/M/H/X
+    │   └── anomaly-thresholds.md                 # 分科目阈值 + 判定矩阵
+    ├── L2-templates/                             # 模板库
+    │   ├── monthly-analysis.md                   # 月度经营分析模板
+    │   ├── quarterly-analysis.md                 # 季度财务分析报告模板
+    │   └── special-report.md                     # 专项财务分析报告模板
+    ├── L2.5-task-templates/                      # 任务模板库
+    │   └── monthly-budget-analysis.md            # 月度预算执行分析编排路径
+    ├── L3-cases/                                 # 案例库
+    │   ├── case-001-monthly.md                   # 月度·5月（淡季）
+    │   ├── case-002-monthly-peak.md              # 月度·6月（旺季）
+    │   └── case-003-quarterly.md                 # 季度·Q2
+    ├── L4-decision-logs/                         # 决策日志
+    │   └── template.md                           # 决策日志模板
+    └── data-buffer/                              # 数据过渡空间
+        ├── input/                                # 待处理数据入口（.gitignore）
+        └── templates/                            # CSV 数据模板
 ```
 
 ### 1.3 核心概念速查
@@ -114,7 +113,7 @@ Step0 模式判别（3秒内完成）
 
 | 阶段 | 谁干 | 干什么 | 用什么库 | 产出什么 |
 |------|------|--------|---------|---------|
-| 感知 | 数据分析师 | 取数 + 阈值比对 + 异常标注 | L1 异常阈值标准 | 异常标注清单 |
+| 感知 | 数据分析师 | 取数 + 阈值比对 + 异常标注 | L1 anomaly-thresholds | 异常标注清单 |
 | 研判 | 数据分析师 | 分色定级 + 归因深度判定 | L3 案例 + L4 决策 | 预警汇总表 |
 | 执行 | 报告撰写员 | 套模板出稿 + 校验收尾 | L2 模板 + L2.5 任务模板 + L1 规则 | 报告初稿 |
 | 交付 | 报告撰写员 | 脱敏 + 格式转换 + STOP gate | L1 脱敏标准 + 权限分级 | 最终交付物 |
@@ -134,7 +133,7 @@ Step0 模式判别（3秒内完成）
 
 > v2.4：原 T1/T2/T3/T4 细化为 Gate-L/M/H/X。原 T4（审计巡视）归入 Gate-H 严格子级；新增 Gate-X 禁止级（删除/修改原始数据）。
 
-**预设方案**（V2.2 新增，减少打断）：
+**预设方案**（V2.2 引入，减少打断）：
 - 内部分析默认：不脱敏、不输出审计三段、分析决策预设阈值自动执行
 - 对外报送默认：全脱敏、输出简版审计三段、判断决策必停
 
@@ -157,12 +156,12 @@ Step0 模式判别（3秒内完成）
 每次新开会话，对 AI 说：
 
 ```
-加载 cfo-command-center 技能，读 {FINANCEOS_KB_ROOT}/三库框架规范_v1.md，继续 V2.2 推进
+加载 cfo-command-center 技能，读 {FINANCEOS_KB_ROOT}/README.md，继续 V2.4 推进
 ```
 
 AI 会自动完成：
 1. 加载技能（调度逻辑入内核层）
-2. 读取三库框架规范（了解库状态和推进进度）
+2. 读取 KB README（了解库状态和文件索引）
 3. 加载当前阶段所需的 L1/L2 规则和模板
 
 ### 3.2 快速启动（日常使用）
@@ -179,10 +178,10 @@ AI 会自动完成：
 
 | 检查项 | 方法 | 预期结果 |
 |--------|------|---------|
-| 技能是否加载 | 问 AI "当前加载了什么技能" | 回答含 cfo-command-center v4.1 |
-| 知识库是否可读 | 问 AI "L1 有哪些文件" | 列出脱敏标准/权限分级/异常阈值标准 |
-| L2.5 模板是否就位 | 问 AI "月度预算执行分析模板版本" | v0.9 |
-| L3 案例数 | 问 AI "案例库有几条" | 3条 |
+| 技能是否加载 | 问 AI "当前加载了什么技能" | 回答含 cfo-command-center v2.4 |
+| 知识库是否可读 | 问 AI "L1 有哪些文件" | 列出 data-masking / permission-tiers / anomaly-thresholds 等 |
+| L2.5 模板是否就位 | 问 AI "月度预算执行分析模板版本" | monthly-budget-analysis.md |
+| L3 案例数 | 问 AI "案例库有几条" | 11条 |
 
 ---
 
@@ -209,7 +208,7 @@ AI 会自动完成：
    - 感知：数据入缓冲区 → 读 L1 阈值比对 → 产出异常标注清单
    - 研判：按判定矩阵分色 → 检查特殊规则（旺季/政策/一次性/化债/补贴）→ 确定归因深度
    - 执行：套 L2 月度模板出稿 → 四维校验（勾稽/异常/口径/格式）
-   - 交付：T2 内部分析默认不脱敏，直接交付
+   - 交付：Gate-M 内部分析默认不脱敏，直接交付
    - 沉淀：经验入 L3，检查阈值调整建议
 
 4. **预期产出**：
@@ -308,7 +307,7 @@ AI 走紧急通道：取数 → 简单归因 → 输出（标注"紧急初稿，
 ```
 1. AI 在分析中发现阈值问题 → 提出调整建议
 2. 总监确认调整方案
-3. 对 AI 说："更新 L1 异常阈值标准，[具体调整内容]"
+3. 对 AI 说："更新 L1 anomaly-thresholds，[具体调整内容]"
 4. AI 修改文件，更新版本号（v1.1 → v1.2）
 5. 记录调整前后值、调整原因、确认人
 ```
@@ -326,14 +325,14 @@ AI 走紧急通道：取数 → 简单归因 → 输出（标注"紧急初稿，
 
 **操作流程**：
 ```
-1. 对 AI 说："更新 L2 月度经营分析模板，[具体修改内容]"
+1. 对 AI 说："更新 L2 monthly-analysis，[具体修改内容]"
 2. AI 修改文件，更新版本号
 3. 下次使用自动套用新版本
 ```
 
 ### 5.3 L2.5 任务模板固化
 
-**当前状态**：v0.9（基于 2 次运行提炼）
+**当前状态**：monthly-budget-analysis.md（基于 2 次运行提炼）
 
 **升版条件**：
 1. 第 3 次月度预算执行分析运行完成
@@ -344,7 +343,7 @@ AI 走紧急通道：取数 → 简单归因 → 输出（标注"紧急初稿，
 ```
 1. 跑第 3 次月度预算执行分析（真实数据）
 2. 对 AI 说："对比本次运行路径与 L2.5 模板，有偏差吗？"
-3. 无偏差 → "升版 L2.5 月度预算执行分析任务模板到 v1.0"
+3. 无偏差 → "升版 L2.5 monthly-budget-analysis 到 v1.0"
 4. 有偏差 → 先更新模板再升版
 ```
 
@@ -388,7 +387,7 @@ AI 走紧急通道：取数 → 简单归因 → 输出（标注"紧急初稿，
 |------|------|------|--------|
 | 技能 | `{FINANCEOS_SKILL_DIR}/` | ~12KB | 高（调度逻辑核心） |
 | 知识库 | `{FINANCEOS_KB_ROOT}/` | ~128KB | 高（积累的经验和规则） |
-| 缓冲区 | `{FINANCEOS_KB_ROOT}/数据缓冲区/` | 可变 | 低（临时数据，可不备份） |
+| 缓冲区 | `{FINANCEOS_KB_ROOT}/data-buffer/` | 可变 | 低（临时数据，可不备份） |
 
 **总备份量**：约 140KB，极小，每次全量备份即可。
 
@@ -427,10 +426,10 @@ BACKUP_DIR="D:/1_Documents/AiWorkSpace/financeos-backup/incremental_$(date +%Y%m
 mkdir -p "$BACKUP_DIR"
 
 # 只备份会变化的库（L3案例库 + L4决策日志 + 数据缓冲区 + L2.5任务模板）
-cp -r {FINANCEOS_KB_ROOT}/L3-案例库/ "$BACKUP_DIR/"
-cp -r {FINANCEOS_KB_ROOT}/L4-决策日志/ "$BACKUP_DIR/"
-cp -r {FINANCEOS_KB_ROOT}/L2.5-任务模板库/ "$BACKUP_DIR/"
-cp -r {FINANCEOS_KB_ROOT}/数据缓冲区/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/L3-cases/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/L4-decision-logs/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/L2.5-task-templates/ "$BACKUP_DIR/"
+cp -r {FINANCEOS_KB_ROOT}/data-buffer/ "$BACKUP_DIR/"
 
 echo "增量备份完成: $BACKUP_DIR"
 ```
@@ -478,14 +477,14 @@ cat {FINANCEOS_SKILL_DIR}/SKILL.md | head -5
 
 | 组件 | 版本 | 文件数 | 最后更新 |
 |------|------|--------|---------|
-| cfo-command-center 技能 | v4.1 | 1 (SKILL.md) | 2026-07-30 |
-| 三库框架规范 | v1.0 | 1 | 2026-07-30 |
-| L1 规则库 | v1.1 (异常阈值) | 3 | 2026-07-30 |
-| L2 模板库 | v1.0 | 3 | 2026-07-30 |
-| L2.5 任务模板 | v0.9 | 1 | 2026-07-30 |
-| L3 案例库 | — | 3 | 2026-07-30 |
+| cfo-command-center 技能 | v2.4 | 1 (SKILL.md) | 2026-07-31 |
+| KB README (索引) | v1 | 1 | 2026-07-31 |
+| L1 规则库 | v2 (data-masking) / v2.0 (permission-tiers) / v1.1 (anomaly-thresholds) | 8 | 2026-07-31 |
+| L2 模板库 | v1 | 7 | 2026-07-31 |
+| L2.5 任务模板 | — | 1 | 2026-07-30 |
+| L3 案例库 | — | 11 | 2026-07-31 |
 | L4 决策日志 | v1 (模板) | 1 | 2026-07-30 |
-| 数据缓冲区 | — | 4 (2组+1报告) | 2026-07-30 |
+| data-buffer | — | 按需 | — |
 
 **版本升级记录规则**：
 - L1：规则变化 → 主版本号变更（v1.1 → v1.2）
@@ -519,7 +518,7 @@ ls -1dt */ | tail -n +11 | xargs rm -rf
 
 ### 7.2 知识库文件找不到
 
-**现象**：AI 说"L1 异常阈值标准不存在"或引用路径错误
+**现象**：AI 说"L1 anomaly-thresholds 不存在"或引用路径错误
 
 **排查**：
 1. 检查目录结构：`find {FINANCEOS_KB_ROOT}/ -type f`
@@ -533,7 +532,7 @@ ls -1dt */ | tail -n +11 | xargs rm -rf
 **排查**：
 1. 检查数据格式是否正确（预算/实际/差异/差异率是否齐全）
 2. 检查阈值数值是否适合公司体量（当前基于中型水务企业估算）
-3. 对 AI 说："检查 L1 异常阈值标准，[科目]的阈值是否合理？"
+3. 对 AI 说："检查 L1 anomaly-thresholds，[科目]的阈值是否合理？"
 4. 如需调整，按 5.1 节流程操作
 
 ### 7.4 校验反复不通过
@@ -553,7 +552,7 @@ ls -1dt */ | tail -n +11 | xargs rm -rf
 **处理**：缓冲区设计为即弃，可安全清理：
 ```bash
 # 清理缓冲区（保留目录结构）
-rm -rf {FINANCEOS_KB_ROOT}/数据缓冲区/*
+rm -rf {FINANCEOS_KB_ROOT}/data-buffer/input/*
 ```
 
 **注意**：清理前确认没有正在进行的任务。缓冲区数据不跨会话保留，清理不影响知识库。
@@ -566,7 +565,7 @@ rm -rf {FINANCEOS_KB_ROOT}/数据缓冲区/*
 
 | 场景 | 指令 |
 |------|------|
-| 完整启动（推进框架） | `加载 cfo-command-center 技能，读 {FINANCEOS_KB_ROOT}/三库框架规范_v1.md，继续 V2.2 推进` |
+| 完整启动（推进框架） | `加载 cfo-command-center 技能，读 {FINANCEOS_KB_ROOT}/README.md，继续 V2.4 推进` |
 | 日常使用（跑分析） | `加载 cfo-command-center 技能，帮我做[任务名]` |
 | 查询（轻量） | `加载 cfo-command-center 技能，[直接问]` |
 
@@ -584,12 +583,12 @@ rm -rf {FINANCEOS_KB_ROOT}/数据缓冲区/*
 
 | 库 | 存什么 | 谁更新 | 当前状态 |
 |----|--------|--------|---------|
-| L1 | 规则红线 | 总监确认后 AI 录入 | 3文件，v1.1 |
-| L2 | 报告模板 | AI 起草→总监确认 | 3模板，v1 |
-| L2.5 | 任务编排路径 | AI 提炼→总监确认 | 1模板，v0.9 |
-| L3 | 历史案例 | AI 自动提取 | 3案例 |
+| L1 | 规则红线 | 总监确认后 AI 录入 | 8文件，含 data-masking v2 |
+| L2 | 报告模板 | AI 起草→总监确认 | 7模板 |
+| L2.5 | 任务编排路径 | AI 提炼→总监确认 | 1模板（monthly-budget-analysis） |
+| L3 | 历史案例 | AI 自动提取 | 11案例 |
 | L4 | 决策记录 | Gate-H+ 自动触发 | 1模板(空) |
-| 缓冲区 | 临时数据 | 自动即弃 | 可清理 |
+| data-buffer | 临时数据 | 自动即弃 | 可清理 |
 
 ### 8.4 备份速查
 
@@ -605,15 +604,16 @@ rm -rf {FINANCEOS_KB_ROOT}/数据缓冲区/*
 
 ```
 技能文件:    {FINANCEOS_SKILL_DIR}/SKILL.md
-框架规范:    {FINANCEOS_KB_ROOT}/三库框架规范_v1.md
-L1 阈值:     {FINANCEOS_KB_ROOT}/L1-规则库/异常阈值标准.md
-L2 月度模板: {FINANCEOS_KB_ROOT}/L2-模板库/月度经营分析模板_v1.md
-L2.5 模板:   {FINANCEOS_KB_ROOT}/L2.5-任务模板库/月度预算执行分析_任务模板_v0.9.md
-L4 模板:     {FINANCEOS_KB_ROOT}/L4-决策日志/决策日志记录模板_v1.md
+KB 索引:     {FINANCEOS_KB_ROOT}/README.md
+L1 阈值:     {FINANCEOS_KB_ROOT}/L1-rules/anomaly-thresholds.md
+L2 月度模板: {FINANCEOS_KB_ROOT}/L2-templates/monthly-analysis.md
+L2.5 模板:   {FINANCEOS_KB_ROOT}/L2.5-task-templates/monthly-budget-analysis.md
+L4 模板:     {FINANCEOS_KB_ROOT}/L4-decision-logs/template.md
 备份目录:    D:/1_Documents/AiWorkSpace/financeos-backup/
-架构文档:    D:/1_Documents/AiWorkSpace/FinanceOS_V4.0_架构设计规范_优化版.md
+架构文档:    docs/architecture.md
+规范文档:    SPEC.md
 ```
 
 ---
 
-*— FinanceOS V2.2 运行手册 v1.0 · 完 —*
+*— FinanceOS V2.4 运行手册 v1.1 · 完 —*

@@ -19,11 +19,12 @@ description: 财务总监指挥台 · FinanceOS 双轴认知操作系统的调�
 - L1 规则库（强制·红线）/ L2 模板库（形式）/ L2.5 任务模板（编排复用）/ L3 案例库（方法参考）/ L4 决策日志（追溯）
 - 数据缓冲区（只读即弃）：业务事实通道，AI 不拥有不沉淀
 - 铁律：一实体只进一个库，交叉用引用禁止复制；缓冲区数字绝不进库
-- 库根目录：`{FINANCEOS_KB_ROOT}/`（仓库内默认 `./kb/`）；框架规范见 `{FINANCEOS_KB_ROOT}/三库框架规范_v1.md`
+- 库根目录：`{FINANCEOS_KB_ROOT}/`（仓库内默认 `./kb/`）；框架规范见 `{FINANCEOS_KB_ROOT}/README.md`
+- 预制 SKILL 见 `skills/` 目录（5 个开箱即用技能：月度分析/预算差异/现金流/公文/知识问答），命中触发词（`/monthly` `/variance` `/cashflow` `/gongwen` `/ask`）直接加载执行，五阶段闭环与 STOP Gate 照常生效
 
 ## 3. 路由调度
 0. **模式判别**（双条件触发，消除假阳性）：紧急信号词(马上/立刻/领导要/巡视组问/紧急/急/今天要/尽快) AND 产出物意图 → 紧急通道（取数→简归因→输出，事后补归档）；无产出物信号(看看/查一下/多少) → 轻量模式；有产出物无紧急词 → 完整模式。"快""赶"单字不触发
-1. **意图识别+消歧**：关键词匹配→命中 L2.5 模板则跳过；多候选 AskUserQuestion 追问
+1. **意图识别+消歧**：①**优先匹配 skills/ 预制 SKILL 触发词**——`/monthly`→`skills/monthly-analysis`、`/variance`→`skills/budget-variance`、`/cashflow`→`skills/cashflow-analysis`、`/gongwen`→`skills/document-drafting`、`/ask`→`skills/knowledge-qa`（中文别名"月度经营分析/预算差异/现金流分析/起草公文/什么是…"同等命中）；命中即加载该 `SKILL.md`，默认读 `examples/` 示例数据，按 SKILL 内执行路径跑五阶段闭环，STOP Gate 照常生效；②否则关键词匹配→命中 L2.5 模板则跳过意图识别；③多候选 AskUserQuestion 追问
 2. **任务分解**：拆子任务、排依赖（串行/并行/硬约束）
 3. **双轴编排**：在角色×生命周期矩阵画路径
 4. **STOP gate+协作模式**：按 Gate 匹配强度，命中预设方案自动执行

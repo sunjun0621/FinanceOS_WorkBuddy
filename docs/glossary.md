@@ -15,8 +15,9 @@
 | **L2.5 任务模板库** | L2.5 Task Template Library | 高频任务的预设编排路径，命中则跳过意图识别 |
 | **L3 案例库** | L3 Case Library | 历史处理经验，`[提炼]`可作依据 |
 | **L4 决策日志** | L4 Decision Log | 重要决策的上下文、选项、结果、复盘 |
-| **数据缓冲区** | Data Buffer | 任务临时数据区，AI 只读即弃，不沉淀 |
-| **风险分层** | Risk Tier | Gate-L 日常→Gate-M 分析→Gate-H 报送/审计→Gate-X 禁止 的四级风险体系（v2.4 由 T1-T4 细化而来） |
+| **数据缓冲区** | Data Buffer | 用户数据和资料的唯一入口（`data-buffer/`），AI 只读即弃，不沉淀 |
+| **产出区** | Output Area | 报告成果的存放区（`output/`），与缓冲区物理隔离 |
+| **风险分层** | Risk Tier | Gate-L 日常→Gate-M 分析→Gate-H 报送/Gate-H (strict) 审计→Gate-X 禁止 的四级风险体系（v2.4 由原 T1-T4 细化而来） |
 | **协作模式** | Collaboration Mode | 委托/标准/紧控三种 AI-用户协作强度 |
 | **接力契约** | Relay Contract | 下一棒发现上一棒产出不合格→回退补齐，不擅自改口径 |
 | **紧急通道** | Emergency Channel | 紧急信号词 + 产出物意图满足时的最简路径 |

@@ -81,9 +81,9 @@ kb/
 
 ## 数据过渡空间
 
-没有 ERP 的用户？将数据放入 `data-staging/input/` 目录即可。
+没有 ERP 的用户？将数据放入 `data-buffer/input/` 目录即可。
 
-详见 [data-staging/README.md](../data-staging/README.md)
+详见 [data-buffer/README.md](../data-buffer/README.md)
 
 ## 适配新领域
 

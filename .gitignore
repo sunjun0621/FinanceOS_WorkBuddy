@@ -19,9 +19,13 @@ Thumbs.db
 *.7z
 *.zip
 
-# Data staging - user input data (privacy protection)
-data-staging/input/*
-!data-staging/input/.gitkeep
+# Data buffer - user input data (privacy protection)
+data-buffer/input/*
+!data-buffer/input/.gitkeep
+
+# Output area - task results (may contain masked data)
+output/*
+!output/.gitkeep
 
 # Commit message temp file
 COMMIT_MSG.txt

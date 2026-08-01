@@ -1,19 +1,22 @@
 # 提交前自检清单 / Pre-Submission Checklist
 
 在提交 PR 前，请逐项检查以下内容。
+详细的命名、格式和 Schema 规范见 [SPEC.md](../../SPEC.md)。
 
 ---
 
 ## 通用检查（所有库适用）
 
-- [ ] 文件命名符合规范（见 [README.md](README.md#命名规范)）
-- [ ] 元数据头完整（效力等级、适用、版本、日期、来源）
+- [ ] 文件名为英文 kebab-case，不含版本号（如 `anomaly-thresholds.md`，不是 `异常阈值标准_v1.1.md`）
+- [ ] YAML frontmatter 完整（id / level / name / version / date / status）
+- [ ] id 字段与文件名一致（不含 `.md` 扩展名）
 - [ ] 中文为主要语言
 - [ ] 无特定企业 identifiable 信息（已脱敏）
 - [ ] 无水印、无敏感数据
 - [ ] 引用语法正确：`[L1:rule-name#anchor]`、`[L2:template-name]`、`[L3:case-name]`
 - [ ] `[待用户补充]` 占位符用于需要用户自定义的值
 - [ ] 版本记录已填写
+- [ ] 运行 `python tools/validate_kb.py` 通过
 
 ---
 
